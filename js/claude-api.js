@@ -70,6 +70,9 @@ function sendChatMessage(){
     let url = `${baseURL}/messages`;
     messageHistory.push({"role": "user", "content": userInput});
     console.log(messageHistory);
+    let para = document.createElement("p class='user'");
+    para.textContent = "User: "+ userInput;
+    results.appendChild(para);
     fetch(url, {
         method: "POST",
         headers: {
@@ -92,8 +95,8 @@ function sendChatMessage(){
 function displayResponse(json){
     console.log(json);
     messageHistory.push({"role": "assistant", "content": json.content[0].text});
-    let para = document.createElement("p");
-    para.textContent = json.content[0].text;
+    let para = document.createElement("p class='ai'");
+    para.textContent = "Claude: "+ json.content[0].text;
     results.appendChild(para);
 }
 
