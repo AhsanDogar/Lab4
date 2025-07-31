@@ -68,7 +68,8 @@ function displayStatus(responseJson){
 function sendChatMessage(){
     let userInput = userMessage.value;
     let url = `${baseURL}/messages`;
-
+    messageHistory.push({"role": "user", "content": userInput});
+    console.log(messageHistory);
     fetch(url, {
         method: "POST",
         headers: {
@@ -78,23 +79,30 @@ function sendChatMessage(){
         body: JSON.stringify({
             "model": "claude-3-5-sonnet-20241022",
             "max_tokens": maxTokens,
-            "messages" : [
-                {"role": "user", "content": userInput}
-            ]
+            "messages" : messageHistory
         })
     }).then(response => {
         return response.json();
     }).then(json => {
         displayResponse(json);
     })
+    
 }
 
 function displayResponse(json){
     console.log(json);
+    messageHistory.push({"role": "assistant", "content": json.content[0].text});
     let para = document.createElement("p");
     para.textContent = json.content[0].text;
     results.appendChild(para);
 }
+
+let messageHistory = [];
+
+
+
+
+
 // STEP 8a: Get form values
 
 // STEP 8b: Create complete url
