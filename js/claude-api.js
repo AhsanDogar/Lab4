@@ -17,7 +17,7 @@ const baseURL = "https://georgian.polaristechservices.com/api/claude";
 // STEP 3: Set your student API key (student ID)
 const studentApiKey = "200615255";
 // STEP 4: Set the maximum tokens for API requests
-const maxTokens = 1000;
+const maxTokens = 100;
 
 /* STEP 5: Reference the DOM elements you'll need to access */
 const userMessage = document.querySelector("#user-message");
